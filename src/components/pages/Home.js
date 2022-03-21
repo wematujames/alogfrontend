@@ -1,7 +1,14 @@
 import React from "react";
 
+//Components
+import Button from "../resources/Button";
+
 function Home() {
-	return <h1>Home page</h1>;
+	return (
+		<div className="container">
+			<Button />
+		</div>
+	);
 }
 
 export default Home;
