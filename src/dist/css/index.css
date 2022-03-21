@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Hurricane&family=Montserrat:wght@100;300;500;600&display=swap');
+:root{
+  --primary-font: 'Montserrat', "sans-serif",
+  --casual-font: 'Hurricane', "cursive",
+  --primary-color: "",
+  --secodary-color: "",
+  --casual-color: "",
+  --button-color: "",
+  --btn-hover: "", 
+  --body-background-color: "",
+  --warning-color: "",
+  --success-color: ""  
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  font-family: var(--primary-font);
+}
