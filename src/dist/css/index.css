@@ -2,12 +2,13 @@
 :root{
   --primary-font: 'Roboto', "sans-serif",
   --casual-font: 'Hurricane', "cursive",
-  --primary-color: "",
-  --secodary-color: "",
-  --casual-color: "",
-  --button-color: "",
-  --btn-hover: "", 
-  --body-background-color: "",
+  --primary-color: "#f2ab98",
+  --secodary-color: "#2b6777",
+  --casual-color: "c8d8e4",
+  --shade-of-white: "#f2f2f2"
+  --button-color: "#2b6777",
+  --btn-hover: "#2b6777", 
+  --body-background-color: "#f2f2f2",
   --warning-color: "",
   --success-color: ""  
 }
@@ -20,3 +21,7 @@
 body{
   font-family: var(--primary-font);
 }
+.btn {
+  background-color: red;
+}
+/* Overall app layout */

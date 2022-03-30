@@ -1,12 +1,16 @@
 import React from "react";
+import InfoSection from "../layout/InfoSection";
+import MainContent from "../layout/MainContent";
 
 //Components
-import Button from "../resources/Button";
+import ProfileSection from "../layout/ProfileSection";
 
 function Home() {
 	return (
-		<div className="container">
-			<Button />
+		<div className="container row">
+			<ProfileSection />
+			<MainContent />
+			<InfoSection />
 		</div>
 	);
 }

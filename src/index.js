@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 
 //Local imports
 import "./dist/css/index.css";
+import "materialize-css/dist/css/materialize.min.css";
 
 //Components
 import App from "./App";
