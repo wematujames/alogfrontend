@@ -1,55 +1,75 @@
 import { useReducer } from "react";
-import { LOGIN, LOGOUT, AUTH_ERROR, LOAD_USER } from "../types";
+import { LOGIN, LOGOUT,CLEAR_AUTH_ERRORS, AUTH_ERROR, LOAD_USER, CLEAR_ERROR } from "../types";
 import axios from "axios";
 //Local
-import AuthContext from "./AuthContext";
-import AuthReducer from "./AuthReducer";
+import AuthContext from "./authContext";
+import AuthReducer from "./authReducer";
+import setAuthHeader from "../../utils/setAuthHeader";
 
-//axios config
-const customAxios = axios.create({
-	baseURL: "http://localhost:5000/api/v1/auth"
-});
-
+//requests
 const AuthState = props => {
 	const initialState = {
 		isAuthenticated: false,
 		user: null,
-		errors: null,
-		isLoading: false,
+		error: null,
+		isLoading: true,
 		token: null
 	};
-
+	
 	const [state, dispatch] = useReducer(AuthReducer, initialState);
-
+	
 	//login user
-	const login = async body => {
+	const logIn = async body => {
 		try {
-			const res = await customAxios.post("/login", body);
-			console.log(res.data);
+			console.log(body)
+			const res = await axios.post("/auth/login", body);
+			dispatch({ type: LOGIN, payload: res.data.token })
+			loadUser()
 		} catch (err) {
-			console.log("err", err);
+			dispatch({ type: AUTH_ERROR, payload: err.response.data.msg })
+			setTimeout(() => {
+				dispatch({ type: CLEAR_ERROR });
+			}, 5000);
 		}
 	};
+	
+	//logout user
+	const logout = () => { 
+		dispatch({ type: LOGOUT });
+	};
+	
 	//load user
-	const logout = () => {};
-	//load user
-	const loadUser = () => {};
-
+	const loadUser = async () => {
+		try {
+			if (localStorage.token) setAuthHeader(localStorage.token);
+			const res = await axios.get("auth/me");
+			dispatch({ type: LOAD_USER, payload: res.data.data });
+		} catch (err) {
+			dispatch({ type: AUTH_ERROR, payload: err.response.data.msg });
+		}
+		
+	};
+	//clear auth errors
+	const clearErrors = () => {
+		dispatch({type: CLEAR_AUTH_ERRORS})
+	}
+	
 	return (
 		<AuthContext.Provider
-			value={{
-				errors: state.errors,
-				token: state.token,
-				user: state.user,
-				isAuthenticated: state.isAuthenticated,
-				isLoading: state.isLoading,
-				login,
-				logout,
-				loadUser
-			}}>
-			{props.children}
+		value={{
+			error: state.error,
+			token: state.token,
+			user: state.user,
+			isAuthenticated: state.isAuthenticated,
+			isLoading: state.isLoading,
+			logIn,
+			logout,
+			loadUser,
+			clearErrors
+		}}>
+		{props.children}
 		</AuthContext.Provider>
-	);
+		);
 };
-
 export default AuthState;
+	

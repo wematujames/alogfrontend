@@ -12,6 +12,7 @@
   --warning-color: "",
   --success-color: ""  
 }
+/* Greenish grayish body bg #4bed96  #e7eced*/
 
 *{
   margin: 0;
@@ -20,6 +21,9 @@
 }
 body{
   font-family: var(--primary-font);
+  background: rgb(75,237,150);
+  background: linear-gradient(120deg, rgba(75,237,150,1) 46%, rgba(231,236,237,1) 46%) !important;
+  /* color */
 }
 .btn {
   background-color: red;

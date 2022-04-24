@@ -1,50 +1,35 @@
-import React, { useContext, useState } from "react";
+import { useEffect } from "react";
+import {useNavigate, useLocation } from "react-router-dom";
 
-import AuthContext from "../../context/auth/AuthContext";
-import AlertContext from "../../context/alert/AlertContext";
+//Hooks
+import useAuth from "../../hooks/useAuth";
+import useAlert from "../../hooks/useAlert";
 
-function Login() {
-	const [fData, setFData] = useState({
-		email: "",
-		password: ""
-	});
+//Components
+import LoginForm from "../layout/LoginForm";
 
-	const authContext = useContext(AuthContext);
+function Login(props) {
+	//Context
+	const authContext = useAuth();
+	const { error, user, clearErrors, loadUser, loading } = authContext;
+	const alertContext = useAlert();
+	const { setAlert } = alertContext;
 
-	const { login, loadUser } = authContext;
-
-	const loginUser = e => {
-		e.preventDefault();
-		console.log(fData);
-
-		login(fData);
-	};
-
-	const handleChange = e => {
-		setFData(prev => {
-			return { ...prev, [e.target.name]: e.target.value };
-		});
-	};
-
-	return (
-		<form onSubmit={loginUser}>
-			<input
-				value={fData.email}
-				onChange={handleChange}
-				type="email"
-				name="email"
-				id="email"
-			/>
-			<input
-				value={fData.password}
-				onChange={handleChange}
-				type="password"
-				name="password"
-				id="password"
-			/>
-			<input type="submit" value="Login" />
-		</form>
-	);
+	//Routing
+	const location = useLocation();
+	const navigate = useNavigate();
+	const from = location?.state?.from?.pathname || "/";
+	
+	//Handle after effects
+	useEffect(() => {
+		if (localStorage.token) loadUser()
+		
+		if (user) navigate(from, { replace: true })
+		
+		//eslint-disable-next-line
+	}, [ localStorage.token, user]);
+	
+	return loading ? <h1>Loading...</h1> : <LoginForm />
 }
 
 export default Login;

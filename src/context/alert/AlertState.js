@@ -1,24 +1,30 @@
-import { Children, useReducer } from "react";
-import { SHOW_ALERT, CLEAR_ALERT } from "../types";
+import { useReducer } from "react";
+import { SET_ERROR, CLEAR_ERROR } from "../types";
 
 //Local
 import AlertContext from "./AlertContext";
 import AlertReducer from "./AlertReducer";
 
 const AlertState = props => {
-	const initialState = [];
+	const initialState = {
+		alert: null
+	};
 
 	const [state, dispatch] = useReducer(AlertReducer, initialState);
 
-	//show alert
-	const show_alert = () => {};
-	//remove alert
-	const removeAlert = () => {};
+	//Set auth error
+	const setAlert = msg => {	
+		dispatch({ type: SET_ERROR, payload: msg })
+		setTimeout(() => {	
+			dispatch({ type: CLEAR_ERROR, payload: msg })
+		}, 5000)
+	}
 
 	return (
 		<AlertContext.Provider
 			value={{
-				alerts: state
+				alert: state.alert,
+				setAlert
 			}}>
 			{props.children}
 		</AlertContext.Provider>

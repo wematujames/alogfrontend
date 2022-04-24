@@ -1,12 +1,17 @@
-import { SHOW_ALERT, CLEAR_ALERT } from "../types";
-import { useReducer } from "react";
+import { SET_ERROR, CLEAR_ERROR } from "../types";
 
 const AuthReducer = (state, action) => {
 	switch (action.type) {
-		case SHOW_ALERT:
-			return;
-		case CLEAR_ALERT:
-			return;
+		case SET_ERROR:
+			return {
+				...state,
+				alert: action.payload,
+			}
+		case CLEAR_ERROR:
+			return {
+				...state,
+				alert: null,
+			}
 		default:
 			return state;
 	}
