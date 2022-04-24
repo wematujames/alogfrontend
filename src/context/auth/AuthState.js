@@ -1,5 +1,12 @@
-import { useReducer } from "react";
-import { LOGIN, LOGOUT,CLEAR_AUTH_ERRORS, AUTH_ERROR, LOAD_USER, CLEAR_ERROR } from "../types";
+import { useReducer, useEffect } from "react";
+import {
+	LOGIN,
+	LOGOUT,
+	CLEAR_AUTH_ERRORS,
+	AUTH_ERROR,
+	LOAD_USER,
+	CLEAR_ERROR
+} from "../types";
 import axios from "axios";
 //Local
 import AuthContext from "./authContext";
@@ -12,32 +19,32 @@ const AuthState = props => {
 		isAuthenticated: false,
 		user: null,
 		error: null,
-		isLoading: true,
+		loading: true,
 		token: null
 	};
-	
+
 	const [state, dispatch] = useReducer(AuthReducer, initialState);
-	
+
 	//login user
 	const logIn = async body => {
 		try {
-			console.log(body)
+			console.log(body);
 			const res = await axios.post("/auth/login", body);
-			dispatch({ type: LOGIN, payload: res.data.token })
-			loadUser()
+			dispatch({ type: LOGIN, payload: res.data.token });
+			loadUser();
 		} catch (err) {
-			dispatch({ type: AUTH_ERROR, payload: err.response.data.msg })
+			dispatch({ type: AUTH_ERROR, payload: err.response.data.msg });
 			setTimeout(() => {
 				dispatch({ type: CLEAR_ERROR });
 			}, 5000);
 		}
 	};
-	
+
 	//logout user
-	const logout = () => { 
+	const logout = () => {
 		dispatch({ type: LOGOUT });
 	};
-	
+
 	//load user
 	const loadUser = async () => {
 		try {
@@ -47,29 +54,37 @@ const AuthState = props => {
 		} catch (err) {
 			dispatch({ type: AUTH_ERROR, payload: err.response.data.msg });
 		}
-		
 	};
 	//clear auth errors
 	const clearErrors = () => {
-		dispatch({type: CLEAR_AUTH_ERRORS})
+		dispatch({ type: CLEAR_AUTH_ERRORS });
+	};
+
+	// load user on first run or refresh
+	if (state.loading) {
+		loadUser();
 	}
-	
+
+	// 'watch' state.token and set headers and local storage on any change
+	useEffect(() => {
+		setAuthHeader(state.token);
+	}, [state.token]);
+
 	return (
 		<AuthContext.Provider
-		value={{
-			error: state.error,
-			token: state.token,
-			user: state.user,
-			isAuthenticated: state.isAuthenticated,
-			isLoading: state.isLoading,
-			logIn,
-			logout,
-			loadUser,
-			clearErrors
-		}}>
-		{props.children}
+			value={{
+				error: state.error,
+				token: state.token,
+				user: state.user,
+				isAuthenticated: state.isAuthenticated,
+				loading: state.loading,
+				logIn,
+				logout,
+				loadUser,
+				clearErrors
+			}}>
+			{props.children}
 		</AuthContext.Provider>
-		);
+	);
 };
 export default AuthState;
-	

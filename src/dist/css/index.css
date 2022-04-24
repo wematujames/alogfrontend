@@ -19,13 +19,13 @@
   padding: 0;
   box-sizing: border-box;
 }
-body{
+
+main {
+  min-height: 100vh;
   font-family: var(--primary-font);
   background: rgb(75,237,150);
-  background: linear-gradient(120deg, rgba(75,237,150,1) 46%, rgba(231,236,237,1) 46%) !important;
-  /* color */
+  background: linear-gradient(120deg, rgba(75,237,150,1) 54%, rgba(231,236,237,1) 46%);
 }
 .btn {
   background-color: red;
 }
-/* Overall app layout */

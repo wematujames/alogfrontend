@@ -3,17 +3,14 @@ import {useNavigate, useLocation } from "react-router-dom";
 
 //Hooks
 import useAuth from "../../hooks/useAuth";
-import useAlert from "../../hooks/useAlert";
 
 //Components
-import LoginForm from "../layout/LoginForm";
+import LoginForm from "../resources/LoginForm";
 
 function Login(props) {
 	//Context
 	const authContext = useAuth();
-	const { error, user, clearErrors, loadUser, loading } = authContext;
-	const alertContext = useAlert();
-	const { setAlert } = alertContext;
+	const { user, loadUser, loading } = authContext;
 
 	//Routing
 	const location = useLocation();

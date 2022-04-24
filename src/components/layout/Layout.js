@@ -1,13 +1,18 @@
-import React from 'react'
+import React from "react";
 import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
 
+import useAuth from "../../hooks/useAuth";
 
 function Layout() {
-  return (
-      <main className="App">
-      <Outlet />
-      </main>
-  )
+	const { user } = useAuth();
+
+	return (
+		<main className='App'>
+			{user && <Navbar />}
+			<Outlet />
+		</main>
+	);
 }
 
-export default Layout
+export default Layout;
