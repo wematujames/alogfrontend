@@ -9,8 +9,8 @@ import {
 } from "@chakra-ui/react";
 
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import LinkItem from "../resources/LinkItem";
-import Logo from "../resources/Logo";
+import LinkItem from "../generalResources/LinkItem";
+import Logo from "../generalResources/Logo";
 import useAuth from "../../hooks/useAuth";
 
 function Navbar() {
@@ -19,7 +19,7 @@ function Navbar() {
 	const { logout } = useAuth();
 
 	return (
-		<Box background='rgba(255,255,255,0.6)'>
+		<Box background='rgba(255,255,255,0.6)' mb='1rem'>
 			<Box width={["100%", "100%", "70%"]} mx='auto'>
 				<Flex
 					justify={["center", "center", "space-between"]}
@@ -27,8 +27,8 @@ function Navbar() {
 					px='1rem'
 					py='0.4rem'>
 					<IconButton
-						as={ isOpen? CloseIcon: HamburgerIcon}
-						size='sm'
+						as={isOpen ? CloseIcon : HamburgerIcon}
+						size='xsm'
 						display={["inline", "inline", "none"]}
 						mr='auto'
 						background='transparent'
@@ -39,11 +39,7 @@ function Navbar() {
 						<LinkItem label='Home' to='/' />
 						<LinkItem label='About' to='/about' />
 						<LinkItem label='Contact' to='/contact' />
-						<Avatar
-							size='md'
-							name='Dan Abrahmov'
-							// src='https://bit.ly/dan-abramov'
-						/>
+						<Avatar size='sm' name='Dan Abrahmov' />
 						<LinkItem to='#!' label='Logout' onClick={logout} />
 					</HStack>
 				</Flex>

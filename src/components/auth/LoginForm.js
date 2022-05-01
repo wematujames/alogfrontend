@@ -8,7 +8,7 @@ import useAuth from "../../hooks/useAuth";
 import useAlert from "../../hooks/useAlert";
 
 //Components
-import Alert from "./Alert";
+import Alert from "../generalResources/Alert";
 
 function LoginForm() {
 	//Context
