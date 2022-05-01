@@ -19,7 +19,7 @@ const AuthState = props => {
 		isAuthenticated: false,
 		user: null,
 		error: null,
-		loading: true,
+		loading: null,
 		token: null
 	};
 
@@ -60,15 +60,18 @@ const AuthState = props => {
 		dispatch({ type: CLEAR_AUTH_ERRORS });
 	};
 
-	// load user on first run or refresh
-	if (state.loading) {
-		loadUser();
-	}
-
 	// 'watch' state.token and set headers and local storage on any change
 	useEffect(() => {
-		setAuthHeader(state.token);
+		if (state.token) {
+			setAuthHeader(state.token);
+		loadUser();
+		}
 	}, [state.token]);
+
+	// load user on first run or refresh
+	// if (state.loading) {
+		
+	// }
 
 	return (
 		<AuthContext.Provider

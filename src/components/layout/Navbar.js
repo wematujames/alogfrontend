@@ -27,7 +27,7 @@ function Navbar() {
 					px='1rem'
 					py='0.4rem'>
 					<IconButton
-						as={HamburgerIcon}
+						as={ isOpen? CloseIcon: HamburgerIcon}
 						size='sm'
 						display={["inline", "inline", "none"]}
 						mr='auto'
