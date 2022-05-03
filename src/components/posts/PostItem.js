@@ -6,7 +6,13 @@ function PostItem({ post, ...rest }) {
 	const { title, body } = post;
 
 	return (
-		<Box p={5} shadow='md' bg='#fff' borderWidth='1px' {...rest}>
+		<Box
+			p={5}
+			shadow='md'
+			bg='#fff'
+			borderRadius={5}
+			borderWidth='1px'
+			{...rest}>
 			<Heading fontSize='xl'>{title}</Heading>
 			<Text mt={4}>{body}</Text>
 		</Box>

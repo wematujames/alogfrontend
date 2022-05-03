@@ -4,7 +4,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 //Hooks
 import useAuth from "../../hooks/useAuth";
 
-//Components
 import LoginForm from "../auth/LoginForm";
 
 function Login(props) {

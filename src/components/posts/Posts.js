@@ -17,7 +17,7 @@ function Post() {
 	});
 
 	return (
-		<VStack spacing={5}>
+		<VStack spacing={3}>
 			{posts.map(post => (
 				<PostItem key={post.id} post={post} />
 			))}

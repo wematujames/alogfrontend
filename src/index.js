@@ -4,9 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 
 //Local imports
-import "./dist/css/index.css";
-
-//Components
+import theme from "./theme/theme";
 import App from "./App";
 
 //Auth authorization
@@ -19,7 +17,7 @@ ReactDOM.render(
 		<AuthProvider>
 			<AlertProvider>
 				<PostsProvider>
-					<ChakraProvider>
+					<ChakraProvider theme={theme}>
 						<Routes>
 							<Route path='/*' element={<App />} />
 						</Routes>

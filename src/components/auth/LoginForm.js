@@ -108,6 +108,7 @@ function LoginForm() {
 				</form>
 				<Flex justifyContent='space-between'>
 					<Button
+						colorScheme='brown'
 						onClick={handleFacebookAuth}
 						leftIcon={<FaFacebook />}
 						fontSize={"0.8rem"}
