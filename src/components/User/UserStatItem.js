@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Text, Heading } from "@chakra-ui/react";
 
-function UserStatItem({ label, value, ...rest }) {
+function UserStatItem({ label, count, ...rest }) {
 	return (
 		<>
 			<Heading fontSize='lg' {...rest}>
-				{value}
+				{count}
 			</Heading>
 			<Text>{label}</Text>
 		</>

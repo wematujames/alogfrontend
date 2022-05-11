@@ -10,16 +10,18 @@ import useAlert from "../../hooks/useAlert";
 //Components
 import Alert from "../generalResources/Alert";
 
-function LoginForm() {
+function RegisterForm() {
 	//Context
 	const authContext = useAuth();
-	const { logIn, error, clearErrors } = authContext;
+	const { register, error, clearErrors } = authContext;
 	const alertContext = useAlert();
 	const { setAlert, alert } = alertContext;
 
 	//Form State
 	const [fData, setFData] = useState({
-		email: "",
+        fName: "",
+        lName: "",
+        email: "",
 		password: ""
 	});
 
@@ -33,8 +35,8 @@ function LoginForm() {
 		if (!fData.email || !fData.password) {
 			setAlert("Please complete all fields", "danger");
 		} else {
-			logIn(fData);
-			setFData({ email: "", password: "" });
+			register(fData);
+			setFData({ fName: "", lName: "", email: "", password: "" });
 		}
 	};
 
@@ -80,6 +82,26 @@ function LoginForm() {
 				<form onSubmit={handleSubmit}>
 					<Box my={5}>
 						<Input
+							placeholder='First Name'
+							value={fData.fName}
+							onChange={handleChange}
+							type='text'
+							name='fName'
+							id='fName'
+						/>
+					</Box>
+					<Box my={5}>
+						<Input
+							placeholder='Last Name'
+							value={fData.lName}
+							onChange={handleChange}
+							type='text'
+							name='lName'
+							id='lName'
+						/>
+					</Box>
+					<Box my={5}>
+						<Input
 							placeholder='Username or email'
 							value={fData.email}
 							onChange={handleChange}
@@ -116,7 +138,7 @@ function LoginForm() {
 						my={1}
 						type='submit'
 						value='Login'>
-						Login with FaceBook
+						Signup with FaceBook
 					</Button>
 					<Button
 						onClick={handleGoogleAuth}
@@ -126,7 +148,7 @@ function LoginForm() {
 						my={1}
 						type='submit'
 						value='Login'>
-						Login with Google
+						Signup with Google
 					</Button>
 				</Flex>
 			</Flex>
@@ -134,4 +156,4 @@ function LoginForm() {
 	);
 }
 
-export default LoginForm;
+export default RegisterForm;

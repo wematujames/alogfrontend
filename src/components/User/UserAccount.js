@@ -25,12 +25,7 @@ function UserActivities({ activities }) {
 			</h2>
 			<AccordionPanel pb={4} px={0}>
 				<GridItem py={1}>
-					{activities.map(activity => (
-						<UserActivitiesItem
-							key={activity.id}
-							activity={activity}
-						/>
-					))}
+					Settings
 				</GridItem>
 			</AccordionPanel>
 		</AccordionItem>

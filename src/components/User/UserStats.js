@@ -1,10 +1,16 @@
 import React from "react";
 import { Grid, GridItem, Divider } from "@chakra-ui/react";
+import PropTypes from 'prop-types'
+
+import useAuth from "../../hooks/useAuth";
 
 //components
 import UserStatItem from "./UserStatItem";
 
-function UserStats({ user: { likes, followers, comments, posts } }) {
+function UserStats() {
+	
+	const { user: { stats: { likes, followers, comments, posts } } } = useAuth()
+	
 	return (
 		<Grid
 			templateColumns='repeat(3, 1fr)'
@@ -12,21 +18,37 @@ function UserStats({ user: { likes, followers, comments, posts } }) {
 			minWidth='100%'
 			textAlign='center'>
 			<GridItem>
-				<UserStatItem label='Posts' value={posts} />
+				<UserStatItem label='Posts' count={posts} />
 			</GridItem>
 			<Divider orientation='vertical' />
 			<GridItem>
-				<UserStatItem label='Likes' value={likes} />
+				<UserStatItem label='Likes' count={likes} />
 			</GridItem>
 			<GridItem>
-				<UserStatItem label='Comments' value={comments} />
+				<UserStatItem label='Comments' count={comments} />
 			</GridItem>
 			<Divider orientation='vertical' />
 			<GridItem>
-				<UserStatItem label='Followers' value={followers} />
+				<UserStatItem label='Followers' count={followers} />
 			</GridItem>
 		</Grid>
 	);
 }
+
+UserStats.propTypes = {
+	user: PropTypes.object.isRequired
+};
+
+UserStats.defaultProps = {
+	user: {
+		fName: "User",
+		lName: "Name",
+		posts: 110,
+		likes: 2500,
+		comments: 2562,
+		followers: 25478
+	}
+};
+
 
 export default UserStats;

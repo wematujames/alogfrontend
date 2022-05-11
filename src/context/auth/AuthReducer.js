@@ -1,4 +1,4 @@
-import { LOAD_USER, CLEAR_ERROR, LOGOUT, LOGIN, AUTH_ERROR } from "../types";
+import { LOAD_USER, CLEAR_ERROR, LOGOUT, LOGIN, AUTH_ERROR, REGISTER, GET_USER_STATS } from "../types";
 
 const AuthReducer = (state, action) => {
 	switch (action.type) {
@@ -14,6 +14,17 @@ const AuthReducer = (state, action) => {
 			return {
 				...state,
 				token: action.payload,
+			};
+		case REGISTER:
+			localStorage.setItem("token", action.payload);
+			return {
+				...state,
+				token: action.payload,
+			};
+		case GET_USER_STATS:
+			return {
+				...state,
+				stats: action.payload,
 			};
 		case LOGOUT:
 		case AUTH_ERROR:

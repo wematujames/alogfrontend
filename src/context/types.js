@@ -5,6 +5,9 @@ export const LOGOUT = "LOGOUT";
 export const LOAD_USER = "LOAD_USER";
 export const AUTH_ERROR = "AUTH_ERROR";
 
+//User
+export const GET_USER_STATS = "GET_USER_STATS"
+
 //Notification / Alerts types
 export const CLEAR_AUTH_ERRORS = "CLEAR_AUTH_ERRORS";
 

@@ -5,7 +5,9 @@ import {
 	CLEAR_AUTH_ERRORS,
 	AUTH_ERROR,
 	LOAD_USER,
-	CLEAR_ERROR
+	CLEAR_ERROR,
+	REGISTER,
+	GET_USER_STATS
 } from "../types";
 import axios from "axios";
 //Local
@@ -20,7 +22,8 @@ const AuthState = props => {
 		user: null,
 		error: null,
 		loading: null,
-		token: null
+		token: null, 
+		stats: null
 	};
 
 	const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -28,10 +31,37 @@ const AuthState = props => {
 	//login user
 	const logIn = async body => {
 		try {
-			console.log(body);
 			const res = await axios.post("/auth/login", body);
 			dispatch({ type: LOGIN, payload: res.data.token });
 			loadUser();
+		} catch (err) {
+			dispatch({ type: AUTH_ERROR, payload: err.response.data.msg });
+			setTimeout(() => {
+				dispatch({ type: CLEAR_ERROR });
+			}, 5000);
+		}
+	};
+
+	//register user
+	const register = async body => {
+		try {
+			console.log(body);
+			const res = await axios.post("/auth/register", body);
+			dispatch({ type: REGISTER, payload: res.data.token });
+			loadUser();
+		} catch (err) {
+			dispatch({ type: AUTH_ERROR, payload: err.response.data.msg });
+			setTimeout(() => {
+				dispatch({ type: CLEAR_ERROR });
+			}, 5000);
+		}
+	};
+
+	//Get user stats
+	const getUserStats = async body => {
+		try {
+			const res = await axios.post("/useraudit/stats");
+			dispatch({ type: GET_USER_STATS, payload: res.data.stats });
 		} catch (err) {
 			dispatch({ type: AUTH_ERROR, payload: err.response.data.msg });
 			setTimeout(() => {
@@ -55,6 +85,7 @@ const AuthState = props => {
 			dispatch({ type: AUTH_ERROR, payload: err.response.data.msg });
 		}
 	};
+	
 	//clear auth errors
 	const clearErrors = () => {
 		dispatch({ type: CLEAR_AUTH_ERRORS });
@@ -81,9 +112,12 @@ const AuthState = props => {
 				user: state.user,
 				isAuthenticated: state.isAuthenticated,
 				loading: state.loading,
+				stats: state.stats,
 				logIn,
 				logout,
 				loadUser,
+				register,
+				getUserStats,
 				clearErrors
 			}}>
 			{props.children}

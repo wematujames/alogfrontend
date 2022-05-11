@@ -1,11 +1,9 @@
 import React from "react";
 import {
-	Box,
 	Heading,
 	Text,
 	Divider,
 	Grid,
-	GridItem,
 	Flex
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
