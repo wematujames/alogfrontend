@@ -4,23 +4,49 @@ import {
 	Text,
 	Divider,
 	Grid,
-	Flex
+	Flex,
+	Button
 } from "@chakra-ui/react";
 import PropTypes from "prop-types";
+import { LockIcon } from "@chakra-ui/icons";
+
+import useAuth from "../../hooks/useAuth";
 
 function PostItem({ post, ...rest }) {
-	const { title, body, likes, comments, createdAt } = post;
+
+	const { user } = useAuth();
+	
+	const { title, body, likes, comments, createdAt, author } = post;
+
+	const edit = (
+		<Text
+			position="absolute"
+			right={3}
+			zIndex={1000}
+			my={5}
+			value='Login'
+			leftIcon={<LockIcon />}>
+			Edit
+		</Text>
+	)
 
 	return (
 		<Grid
+			position="relative"
 			flexDirection='column'
-			p={5}
+			px={5}
+			py={3}
 			shadow='md'
 			bg='#fff'
 			borderRadius={5}
 			borderWidth='1px'
 			{...rest}>
-			<Heading fontSize='lg'>{title}</Heading>
+			<Flex justifyContent="space-between" alignItems="center"  >
+				<Text fontSize='lg' fontWeight="bold" my={0}>
+				{title}
+				</Text>
+				{user.id !== author && edit}
+			</Flex>
 			<Flex flexDir='column'>
 				<Text mt={4}>{body}</Text>
 				<Text fontSize='sm' color='orange.500' alignSelf='flex-end'>

@@ -11,7 +11,7 @@ function Login(props) {
 	const authContext = useAuth();
 	const { user, loadUser, loading } = authContext;
 
-	//Routing
+	//Re route user if already logged in
 	const location = useLocation();
 	const navigate = useNavigate();
 	const from = location?.state?.from?.pathname || "/";

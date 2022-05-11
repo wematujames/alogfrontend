@@ -7,16 +7,15 @@ import useAuth from "../../hooks/useAuth";
 import RegisterForm from "../auth/RegisterForm";
 
 function Login(props) {
-	//Context
+
 	const authContext = useAuth();
 	const { user, loadUser, loading } = authContext;
 
-	//Routing
+	//Routing user if logged in 
 	const location = useLocation();
 	const navigate = useNavigate();
 	const from = location?.state?.from?.pathname || "/";
 
-	//Handle after effects
 	useEffect(() => {
 		if (localStorage.token) loadUser();
 

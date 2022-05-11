@@ -28,7 +28,7 @@ function Home() {
 				<Posts />
 			</GridItem>
 
-			{/* This like recommendations / info / news etc */}
+			{/* Things like recommendations / info / news etc */}
 			<GridItem display={["none", "none", "grid"]} colSpan={2} px={3}>
 				<Others />
 			</GridItem>

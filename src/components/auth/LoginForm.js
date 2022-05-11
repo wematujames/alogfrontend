@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { Input, Flex, Heading, Button, Box } from "@chakra-ui/react";
-import { LockIcon } from "@chakra-ui/icons";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
 
 //Hooks
 import useAuth from "../../hooks/useAuth";
@@ -9,6 +7,7 @@ import useAlert from "../../hooks/useAlert";
 
 //Components
 import Alert from "../generalResources/Alert";
+import OAuth from "./OAuth";
 
 function LoginForm() {
 	//Context
@@ -18,10 +17,7 @@ function LoginForm() {
 	const { setAlert, alert } = alertContext;
 
 	//Form State
-	const [fData, setFData] = useState({
-		email: "",
-		password: ""
-	});
+	const [fData, setFData] = useState({email: "", password: "" });
 
 	//Event handlers
 	const handleChange = e => {
@@ -37,18 +33,7 @@ function LoginForm() {
 			setFData({ email: "", password: "" });
 		}
 	};
-
-	//Handle google oauth
-	const handleGoogleAuth = e => {
-		e.preventDefault();
-	};
-
-	//Handle facebook oauth
-	const handleFacebookAuth = e => {
-		e.preventDefault();
-	};
-
-	//Handle after effects
+	
 	useEffect(() => {
 		if (error) {
 			setAlert(error);
@@ -85,7 +70,6 @@ function LoginForm() {
 							onChange={handleChange}
 							type='email'
 							name='email'
-							id='email'
 						/>
 					</Box>
 					<Box>
@@ -95,40 +79,16 @@ function LoginForm() {
 							onChange={handleChange}
 							type='password'
 							name='password'
-							id='password'
 						/>
 					</Box>
 					<Button
 						my={5}
 						value='Login'
-						leftIcon={<LockIcon />}
 						type='submit'>
 						Login
 					</Button>
 				</form>
-				<Flex justifyContent='space-between'>
-					<Button
-						colorScheme='brown'
-						onClick={handleFacebookAuth}
-						leftIcon={<FaFacebook />}
-						fontSize={"0.8rem"}
-						variant={"outline"}
-						my={1}
-						type='submit'
-						value='Login'>
-						Login with FaceBook
-					</Button>
-					<Button
-						onClick={handleGoogleAuth}
-						leftIcon={<FaGoogle />}
-						fontSize={"0.8rem"}
-						variant={"outline"}
-						my={1}
-						type='submit'
-						value='Login'>
-						Login with Google
-					</Button>
-				</Flex>
+				<OAuth/>
 			</Flex>
 		</Flex>
 	);

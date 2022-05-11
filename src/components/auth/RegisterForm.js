@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Input, Flex, Heading, Button, Box } from "@chakra-ui/react";
 import { LockIcon } from "@chakra-ui/icons";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
 
 //Hooks
 import useAuth from "../../hooks/useAuth";
@@ -9,6 +8,7 @@ import useAlert from "../../hooks/useAlert";
 
 //Components
 import Alert from "../generalResources/Alert";
+import OAuth from "./OAuth";
 
 function RegisterForm() {
 	//Context
@@ -40,15 +40,7 @@ function RegisterForm() {
 		}
 	};
 
-	//Handle google oauth
-	const handleGoogleAuth = e => {
-		e.preventDefault();
-	};
 
-	//Handle facebook oauth
-	const handleFacebookAuth = e => {
-		e.preventDefault();
-	};
 
 	//Handle after effects
 	useEffect(() => {
@@ -87,7 +79,6 @@ function RegisterForm() {
 							onChange={handleChange}
 							type='text'
 							name='fName'
-							id='fName'
 						/>
 					</Box>
 					<Box my={5}>
@@ -97,7 +88,6 @@ function RegisterForm() {
 							onChange={handleChange}
 							type='text'
 							name='lName'
-							id='lName'
 						/>
 					</Box>
 					<Box my={5}>
@@ -107,7 +97,6 @@ function RegisterForm() {
 							onChange={handleChange}
 							type='email'
 							name='email'
-							id='email'
 						/>
 					</Box>
 					<Box>
@@ -117,7 +106,6 @@ function RegisterForm() {
 							onChange={handleChange}
 							type='password'
 							name='password'
-							id='password'
 						/>
 					</Box>
 					<Button
@@ -128,29 +116,7 @@ function RegisterForm() {
 						Login
 					</Button>
 				</form>
-				<Flex justifyContent='space-between'>
-					<Button
-						colorScheme='brown'
-						onClick={handleFacebookAuth}
-						leftIcon={<FaFacebook />}
-						fontSize={"0.8rem"}
-						variant={"outline"}
-						my={1}
-						type='submit'
-						value='Login'>
-						Signup with FaceBook
-					</Button>
-					<Button
-						onClick={handleGoogleAuth}
-						leftIcon={<FaGoogle />}
-						fontSize={"0.8rem"}
-						variant={"outline"}
-						my={1}
-						type='submit'
-						value='Login'>
-						Signup with Google
-					</Button>
-				</Flex>
+				<OAuth/>
 			</Flex>
 		</Flex>
 	);

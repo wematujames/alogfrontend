@@ -1,7 +1,8 @@
 import React from "react";
+import EditPost from "../posts/EditPost";
 
-function EditPost() {
-	return <h1>Edit post page</h1>;
+function UpdatePost() {
+	return <EditPost/>;
 }
 
-export default EditPost;
+export default UpdatePost;
