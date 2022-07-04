@@ -11,8 +11,8 @@ import {
 } from "../types";
 import axios from "axios";
 //Local
-import AuthContext from "./authContext";
-import AuthReducer from "./authReducer";
+import AuthContext from "./AuthContext";
+import AuthReducer from "./AuthReducer";
 import setAuthHeader from "../../utils/setAuthHeader";
 
 //requests
@@ -22,7 +22,7 @@ const AuthState = props => {
 		user: null,
 		error: null,
 		loading: null,
-		token: null, 
+		token: null,
 		stats: null
 	};
 
@@ -85,7 +85,7 @@ const AuthState = props => {
 			dispatch({ type: AUTH_ERROR, payload: err.response.data.msg });
 		}
 	};
-	
+
 	//clear auth errors
 	const clearErrors = () => {
 		dispatch({ type: CLEAR_AUTH_ERRORS });
@@ -95,13 +95,13 @@ const AuthState = props => {
 	useEffect(() => {
 		if (state.token) {
 			setAuthHeader(state.token);
-		loadUser();
+			loadUser();
 		}
 	}, [state.token]);
 
 	// load user on first run or refresh
 	// if (state.loading) {
-		
+
 	// }
 
 	return (
